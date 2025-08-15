@@ -104,6 +104,7 @@ action:
             id: turn_on
         sequence:
           - service: scene.turn_on
+            data: {}
             target:
               entity_id: "{{ scene_name }}"
           - delay:
