@@ -65,7 +65,7 @@ max_exceeded: silent
 
 variables:
   linked_entities: !input group_entity
-  scene_name: "{{ !input source_entity |regex_replace(find='.', replace='_', ignorecase=False) }}"
+  scene_name: "{{ source_entity |regex_replace(find='.', replace='_', ignorecase=False) }}"
 
 trigger:
   - platform: state
