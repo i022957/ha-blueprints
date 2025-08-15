@@ -103,10 +103,6 @@ action:
           - condition: trigger
             id: turn_on
         sequence:
-          - service: scene.delete
-            data: {}
-            target:
-              entity_id: "{{ 'scene.' ~ scene_name }}"
           - service: scene.turn_on
             data: {}
             target:
@@ -117,6 +113,10 @@ action:
           - condition: trigger
             id: turn_off
         sequence:
+          - service: scene.delete
+            data: {}
+            target:
+              entity_id: "{{ 'scene.' ~ scene_name }}"
           - service: scene.create
             data:
               scene_id: "{{ scene_name }}"
