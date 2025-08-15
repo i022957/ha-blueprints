@@ -65,7 +65,9 @@ max_exceeded: silent
 
 variables:
   linked_entities: !input group_entity
-  scene_name: "{{ source_entity |regex_replace(find='.', replace='_', ignorecase=False) }}"
+  source_entities: !input source_entity
+  group_entities: !input group_entity
+  scene_name: '{{ source_entities | regex_replace(find=''.'', replace=''_'', ignorecase=False) }}'
 
 trigger:
   - platform: state
@@ -108,16 +110,15 @@ action:
               milliseconds: !input delay_miliseconds
       - conditions:
           - condition: trigger
-            id:
-              - turn_off
+            id: turn_off
         sequence:
           - service: scene.create
             data:
               scene_id: "{{ scene_name }}"
-              snapshot_entities: "{{ state_attr(group_entity,'entity_id') }}"
+              snapshot_entities: "{{ state_attr( group_entities,'entity_id') }}"
           - service: homeassistant.turn_off
             target:
-              entity_id: "{{ state_attr(group_entity,'entity_id') | reject('eq', trigger.entity_id) | select('is_state', 'on') | list }}"
+              entity_id: "{{ state_attr( group_entities,'entity_id') | reject('eq', trigger.entity_id) | select('is_state', 'on') | list }}"
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
