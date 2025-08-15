@@ -95,18 +95,16 @@ action:
           - condition: trigger
             id: turn_on
         sequence:
-          - service: "homeassistant.turn_on"
+          - service: homeassistant.turn_on
             target:
               entity_id: "{{linked_entities | reject('eq', trigger.entity_id) | select('is_state', 'off') | list }}"
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
           - condition: trigger
-            id:
-              - turn_off
-              - turn on
+            id: turn_off
         sequence:
-          - service: "homeassistant.turn_off"
+          - service: homeassistant.turn_off
             target:
               entity_id: "{{linked_entities | reject('eq', trigger.entity_id) | select('is_state', 'on') | list }}"
           - delay:
