@@ -42,7 +42,7 @@ blueprint:
       description: Entity whose state and attributes will be replicated (if any of them transitions to ON state, all will be ON. Same for the OFF, BRIGHTNESS, COLOR_TEMP, and SPEED states).
       selector:
         entity:
-          multiple: true
+          multiple: false
     linked_entity:
       name: Target Entities
       description: Entities whose state and attributes will be linked (if any of them transitions to ON state, all will be ON. Same for the OFF, BRIGHTNESS, COLOR_TEMP, and SPEED states).
