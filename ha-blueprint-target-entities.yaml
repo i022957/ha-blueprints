@@ -67,7 +67,7 @@ variables:
   linked_entities: !input group_entity
   source_entities: !input source_entity
   group_entities: !input group_entity
-  scene_name: '{{ source_entities | regex_replace(find='\.', replace='_', ignorecase=False) }}'
+  scene_name: "{{ source_entities | regex_replace(find='\.', replace='_', ignorecase=False) }}"
 
 trigger:
   - platform: state
