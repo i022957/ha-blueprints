@@ -116,7 +116,7 @@ action:
         sequence:
         - if:
           - condition: template
-            value_template: "{{ not is_state( scene_entity_id , 'unknown') }}"
+            value_template: "{{ states( scene_entity_id ) != 'unknown' }}"
           then:
             - service: scene.delete
               data: {}
