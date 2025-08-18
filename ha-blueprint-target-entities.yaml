@@ -67,7 +67,8 @@ variables:
   source_entities: !input source_entity
   linked_entities: !input group_entity
   group_entities: !input group_entity
-  scene_name: "{{ 'scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
+  scene_id: "{{ 'scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
+  scene_entity_id: "{{ 'scene.' ~ scene_name }}"
 
 trigger:
   - platform: state
@@ -106,7 +107,7 @@ action:
           - service: scene.turn_on
             data: {}
             target:
-              entity_id: "{{ 'scene.' ~ scene_name }}"
+              entity_id: scene_entity_id
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
@@ -115,15 +116,15 @@ action:
         sequence:
           - if:
             - condition: template
-                value_template: "{{ is_state('scene.' + scene_name, 'unknown') }}"
+                value_template: "{{ scene_entity_id, 'unknown') }}"
             then:
               - service: scene.delete
                 data: {}
                 target:
-                  entity_id: "{{ 'scene.' ~ scene_name }}"
+                  entity_id: scene_entity_id
           - service: scene.create
             data:
-              scene_id: "{{ scene_name }}"
+              scene_id: scene_id
               snapshot_entities: "{{ state_attr( group_entities,'entity_id') }}"
           - service: homeassistant.turn_off
             target:
