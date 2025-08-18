@@ -116,7 +116,7 @@ action:
         sequence:
           - if:
             - condition: state
-              entity_id: "{{  this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False) }}"
+              entity_id: "{{  this.entity_id }}"
               state: Unknown
             then:
             else:
