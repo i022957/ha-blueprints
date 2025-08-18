@@ -116,8 +116,8 @@ action:
         sequence:
           - if:
             - condition: state
-                entity_id: "{{ scene_entity_id }}"
-                state: Unknown
+              entity_id: "{{ scene_entity_id }}"
+              state: Unknown
             then:
             else:
               - service: scene.delete
