@@ -107,7 +107,7 @@ action:
           - service: scene.turn_on
             data: {}
             target:
-              entity_id: scene_entity_id
+              entity_id: "{{ scene_entity_id }}"
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
@@ -124,7 +124,7 @@ action:
 #                  entity_id: scene_entity_id
           - service: scene.create
             data:
-              scene_id: scene_id
+              scene_id: "{{ scene_id }}"
               snapshot_entities: "{{ state_attr( group_entities,'entity_id') }}"
           - service: homeassistant.turn_off
             target:
