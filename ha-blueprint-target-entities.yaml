@@ -67,8 +67,8 @@ variables:
   source_entities: !input source_entity
   linked_entities: !input group_entity
   group_entities: !input group_entity
-  scene_id: "{{ 'scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
-  scene_entity_id: "{{ 'scene.' ~ scene_name }}"
+  scene_id: "True" ##"{{ 'scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
+  scene_entity_id: "False" #{{ 'scene.' ~ scene_name }}"
 
 trigger:
   - platform: state
@@ -107,7 +107,7 @@ action:
           - service: scene.turn_on
             data: {}
             target:
-              entity_id: scene_entity_id
+              entity_id: "{{ scene_entity_id }}"
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
@@ -116,14 +116,14 @@ action:
         sequence:
           - if:
             - condition: state
-              entity_id: scene_entity_id
+              entity_id: "{{ scene_entity_id }}"
               state: Unknown
             then:
             else:
               - service: scene.delete
                 data: {}
                 target:
-                  entity_id: scene_entity_id
+                  entity_id: "{{ scene_entity_id }}"
           - service: scene.create
             data:
               scene_id: scene_id
