@@ -122,14 +122,14 @@ action:
               data: {}
               target:
                 entity_id: "{{ scene_entity_id }}"
-          - service: scene.create
+        - service: scene.create
             data:
               scene_id: "{{ scene_id }}"
               snapshot_entities: "{{ state_attr( group_entities,'entity_id') }}"
-          - service: homeassistant.turn_off
+        - service: homeassistant.turn_off
             target:
               entity_id: "{{ state_attr( group_entities,'entity_id') | reject('eq', trigger.entity_id) | select('is_state', 'on') | list }}"
-          - delay:
+        - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
           - condition: trigger
