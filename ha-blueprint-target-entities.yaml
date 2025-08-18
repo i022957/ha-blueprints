@@ -68,7 +68,7 @@ variables:
   linked_entities: !input group_entity
   group_entities: !input group_entity
   scene_id: "{{ this.entity_id }}" ##"{{ 'scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
-  scene_entity_id: "{{ scene_id }}" ##"{{ 'scene.' ~ scene_id}}"
+  scene_entity_id: "{{ 'scene.' ~ scene_id}}"
 
 trigger:
   - platform: state
