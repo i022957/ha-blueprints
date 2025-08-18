@@ -115,7 +115,7 @@ action:
         sequence:
           - if:
             - condition: state
-              entity_id: 'scene.' ~ scene_name
+              entity_id: "{{ 'scene.' ~ scene_name }}"
               state: not None
             then:
               - service: scene.delete
