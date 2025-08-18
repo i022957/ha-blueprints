@@ -116,7 +116,7 @@ action:
         sequence:
           - if:
             - condition: state
-              entity_id: "{{ scene_entity_id }}"
+              entity_id: "{{ 'scene.scene_' ~ ( this.entity_id | regex_replace(find='\\.', replace='_', ignorecase=False)) }}"
               state: Unknown
             then:
             else:
