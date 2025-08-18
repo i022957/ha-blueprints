@@ -114,9 +114,8 @@ action:
             id: turn_off
         sequence:
           - if:
-            - condition: state
-              entity_id: "{{ 'scene.' ~ scene_name }}"
-              state: not None
+            - condition: template
+                value_template: "{{ states('scene.' ~ scene_name) != None }}"
             then:
               - service: scene.delete
                 data: {}
