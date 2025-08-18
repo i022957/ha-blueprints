@@ -105,9 +105,9 @@ action:
             id: turn_on
         sequence:
           - service: scene.turn_on
-            data: {}
-            target:
-              entity_id: "{{ scene_entity_id }}"
+            data:
+              target:
+                entity_id: "{{ scene_entity_id }}"
           - delay:
               milliseconds: !input delay_miliseconds
       - conditions:
@@ -119,9 +119,9 @@ action:
             value_template: "{{ not is_state( scene_entity_id , 'unknown') }}"
           then:
             - service: scene.delete
-              data: {}
-              target:
-                entity_id: "{{ scene_entity_id }}"
+              data:
+                target:
+                  entity_id: "{{ scene_entity_id }}"
         - service: scene.create
           data:
             scene_id: "{{ scene_id }}"
