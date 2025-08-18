@@ -114,14 +114,14 @@ action:
           - condition: trigger
             id: turn_off
         sequence:
-          - if:
-            - condition: template
-                value_template: "{{ is_state( }} scene_entity_id {{, 'unknown') }}"
-            then:
-              - service: scene.delete
-                data: {}
-                target:
-                  entity_id: scene_entity_id
+#          - if:
+#            - condition: template
+#                value_template: "{{ is_state( scene_entity_id, 'unknown') }}"
+#            then:
+#              - service: scene.delete
+#                data: {}
+#                target:
+#                  entity_id: scene_entity_id
           - service: scene.create
             data:
               scene_id: scene_id
