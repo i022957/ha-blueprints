@@ -72,13 +72,23 @@ variables:
 
 trigger:
   - platform: state
-    id: turn_on
+    id: turn_on_source
     entity_id: !input source_entity
     from: "off"
     to: "on"
   - platform: state
-    id: turn_off
+    id: turn_off_source
     entity_id: !input source_entity
+    from: "on"
+    to: "off"
+  - platform: state
+    id: turn_on_group
+    entity_id: !input group_entity
+    from: "off"
+    to: "on"
+  - platform: state
+    id: turn_off_group
+    entity_id: !input group_entity
     from: "on"
     to: "off"
 #  - platform: state
@@ -102,7 +112,7 @@ action:
   - choose:
       - conditions:
           - condition: trigger
-            id: turn_on
+            id: turn_on_source
         sequence:
           - service: scene.turn_on
             data: {}
@@ -112,7 +122,7 @@ action:
               milliseconds: !input delay_miliseconds
       - conditions:
           - condition: trigger
-            id: turn_off
+            id: turn_off_source
         sequence:
         - if:
           - condition: template
