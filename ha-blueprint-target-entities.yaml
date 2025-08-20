@@ -133,6 +133,17 @@ action:
           - condition: trigger
             id: turn_on_source
         sequence:
+          - if:
+            - condition: template
+              value_template: "{{ states( scene_entity_id ) == 'unknown' }}"
+            then:
+              - service: homeassistant.turn_on
+                target:
+                  entity_id: "{{ state_attr( group_entities,'entity_id') | reject('eq', trigger.entity_id) | select('is_state', 'off') | list }}"
+              - service: scene.create
+                data:
+                  scene_id: "{{ scene_id }}"
+                  snapshot_entities: "{{ state_attr( group_entities,'entity_id') }}"                    
           - service: scene.turn_on
             data: {}
             target:
